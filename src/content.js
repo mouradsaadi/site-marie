@@ -1,5 +1,5 @@
 export const profile = {
-  name: 'Marie Robin',
+  name: 'Marie E. Robin',
   email: 'marierobin@hks.harvard.edu',
   role: 'Ernest May Fellow in History and Policy',
   institution: 'Harvard University',

@@ -11,13 +11,13 @@ const Email = ({ children = profile.email }) => <a className="text-link" href={`
 function About() {
   return <div className="about-grid">
     <aside className="portrait-column">
-      <img className="portrait" src={`${import.meta.env.BASE_URL}marie-robin.jpg`} alt="Marie Robin" width="3413" height="5120" fetchPriority="high" />
+      <img className="portrait" src={`${import.meta.env.BASE_URL}marie-robin.jpg`} alt={profile.name} width="3413" height="5120" fetchPriority="high" />
       <div className="portrait-caption"><span>Harvard University</span><span>Cambridge, Massachusetts</span></div>
       <div className="contact-block"><span className="eyebrow">Get in touch</span><Email /></div>
     </aside>
     <article className="about-copy">
       <p className="eyebrow">About</p>
-      <h1>Marie Robin</h1>
+      <h1>{profile.name}</h1>
       <p className="appointment">{profile.role}<br /><span>{profile.institution}</span></p>
       <div className="short-rule" />
       <p className="intro">{profile.introduction}</p>
@@ -73,7 +73,7 @@ function App() {
     window.addEventListener('hashchange', navigate);
     return () => window.removeEventListener('hashchange', navigate);
   }, []);
-  useEffect(() => { document.title = `${pages.find(([id]) => id === page)[1]} | Marie Robin`; }, [page]);
+  useEffect(() => { document.title = page === 'about' ? `${profile.name} | Historian & Harvard Postdoctoral Fellow` : `${pages.find(([id]) => id === page)[1]} | ${profile.name}`; }, [page]);
   useEffect(() => {
     const escape = event => { if (event.key === 'Escape') { setMenuOpen(false); document.querySelector('.menu-toggle')?.focus(); } };
     if (menuOpen) window.addEventListener('keydown', escape);
@@ -87,7 +87,7 @@ function App() {
       <nav id="main-navigation" className={menuOpen ? 'navigation is-open' : 'navigation'} aria-label="Main navigation">{pages.map(([id, label]) => <a key={id} href={`#${id}`} aria-current={page === id ? 'page' : undefined} onClick={() => setMenuOpen(false)}>{label}</a>)}</nav>
     </div></header>
     <main id="main-content" ref={main} tabIndex="-1" key={page}>{content[page]}</main>
-    <footer className="site-footer"><div><a href="#about" className="footer-name">Marie Robin</a><span>Historian of modern France & its Empire</span></div><Email /></footer>
+    <footer className="site-footer"><div><a href="#about" className="footer-name">{profile.name}</a><span>Historian of modern France & its Empire</span></div><Email /></footer>
   </>;
 }
 
