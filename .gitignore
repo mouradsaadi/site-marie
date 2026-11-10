@@ -4,3 +4,10 @@ dist/
 *.local
 .openai/
 qa/
+
+.env
+.env.*
+!.env.example
+.prerender/
+
+.tools/
